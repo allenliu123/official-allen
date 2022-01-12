@@ -37,7 +37,12 @@ http.createServer(function(req, res) {
   })
 
   message.onText(function(msg) {
-    message.reply(msg, `收到 ${msg.Content}`);
+    // message.reply(msg, `收到 ${msg.Content}`);
+    if (msg === '1') {
+      const str = request('get', 'https://file.ifthat.com/getText').getBody('utf8')
+      const content = JSON.parse(str).content
+      message.reply(msg, content);
+    } 
   })
 
   message.onImage(function(msg) {
