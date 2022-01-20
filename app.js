@@ -1,15 +1,17 @@
-let http = require('http');
-let wechat = require('wechat-public-nodejs');
-let request = require('sync-request');
+const http = require('http');
+const wechat = require('wechat-public-nodejs');
+const request = require('sync-request');
+const { saveText } = require('./utils/handle');
 
-let Message = wechat.Message;
-let message = new Message();
+const Message = wechat.Message;
+const message = new Message();
 
-let port = 8085;
+const port = 8085;
 
 http.createServer(function(req, res) {
   
   message.save(req, res);
+  // wechat.auth(req, res, '');
 
   // message.onEventAll(function(msg) {
   //   console.log(msg)
@@ -39,11 +41,15 @@ http.createServer(function(req, res) {
   message.onText(function(msg) {
     // message.reply(msg, `收到 ${msg.Content}`);
     if (msg.Content === '1') {
-      const str = request('get', 'https://file.ifthat.com/getText').getBody('utf8')
-      const content = JSON.parse(str).content
+      const str = request('get', 'https://file.ifthat.com/getText').getBody('utf8');
+      const content = JSON.parse(str).content;
       message.reply(msg, content);
     } else {
-      message.reply(msg, '')
+      saveText(msg.Content).then(() => {
+        message.reply(msg, 'saved your text');
+      }).catch(() => {
+        message.reply(msg, '');
+      });
     }
   })
 
