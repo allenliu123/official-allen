@@ -60,7 +60,7 @@ http.createServer(function(req, res) {
   // 收到图片
   message.onImage(function(msg) {
     saveImage(msg.PicUrl).then((url) => {
-      message.reply(msg, 'upload success, there is' + url);
+      message.reply(msg, 'upload success, there is ' + url);
     }).catch(() => {
       message.reply(msg, '');
     });
