@@ -2,7 +2,7 @@
   "name": "official-allen",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -10,6 +10,8 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "js-yaml": "^4.1.0",
+    "request": "^2.88.2",
     "request-promise": "^4.2.6",
     "sync-request": "^6.1.0",
     "wechat-public-nodejs": "^0.1.1"

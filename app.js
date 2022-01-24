@@ -1,7 +1,10 @@
 const http = require('http');
 const wechat = require('wechat-public-nodejs');
 const request = require('sync-request');
-const { saveText } = require('./utils/handle');
+const {
+  saveText,
+  saveImage
+} = require('./utils/handle');
 
 const Message = wechat.Message;
 const message = new Message();
@@ -38,6 +41,7 @@ http.createServer(function(req, res) {
     message.reply(msg, '感谢关注');
   })
 
+  // 收到文本
   message.onText(function(msg) {
     // message.reply(msg, `收到 ${msg.Content}`);
     if (msg.Content === '1') {
@@ -53,8 +57,13 @@ http.createServer(function(req, res) {
     }
   })
 
+  // 收到图片
   message.onImage(function(msg) {
-    message.reply(msg, `收到 image url: ${msg.PicUrl}`);
+    saveImage(msg.PicUrl).then((url) => {
+      message.reply(msg, 'upload success, there is' + url);
+    }).catch(() => {
+      message.reply(msg, '');
+    });
   })
 
   message.onVoice(function(msg) {
