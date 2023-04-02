@@ -1,7 +1,7 @@
 const request = require('request');
 const rp = require('request-promise');
 
-export const sendMessage = (text) => {
+function sendMessage(text) {
   return new Promise((resolve, reject) => {
     rp({
       method: 'post',
@@ -18,3 +18,6 @@ export const sendMessage = (text) => {
   });
 };
 
+module.exports = {
+  sendMessage
+}

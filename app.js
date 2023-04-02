@@ -7,7 +7,7 @@ const {
 } = require('./utils/handle');
 const {
   sendMessage
-} = require('./utils/chat');
+} = require('./utils/chatgpt');
 
 const Message = wechat.Message;
 const message = new Message();
