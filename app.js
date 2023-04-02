@@ -5,6 +5,9 @@ const {
   saveText,
   saveImage
 } = require('./utils/handle');
+const {
+  sendMessage
+} = require('./utils/chat');
 
 const Message = wechat.Message;
 const message = new Message();
@@ -48,6 +51,12 @@ http.createServer(function(req, res) {
       const str = request('get', 'https://file.ifthat.com/getText').getBody('utf8');
       const content = JSON.parse(str).content;
       message.reply(msg, content);
+    } else if (msg.Content.slice(0, 5) === 'chat:') {
+      // 使用 chatgpt
+      const content = msg.Content.slice(5)
+      sendMessage(content)
+        .then(res => message.reply(msg, res))
+        .catch(err => message.reply(msg, err))
     } else {
       saveText(msg.Content).then(() => {
         message.reply(msg, 'saved your text');
