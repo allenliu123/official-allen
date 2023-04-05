@@ -11,7 +11,7 @@ function sendMessage(text) {
       },
       json: true
     }).then(res => {
-      resolve(res.message);
+      resolve(res?.message?.content);
     }).catch(() => {
       reject('chatgpt server error')
     })
