@@ -12,7 +12,7 @@ const {
 const Message = wechat.Message;
 const message = new Message();
 
-const port = 8085;
+const port = 8087;
 
 http.createServer(function(req, res) {
   

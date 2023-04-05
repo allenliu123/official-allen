@@ -9,10 +9,13 @@ function sendMessage(text) {
       body: {
         message: text
       },
-      json: true
+      json: true,
+      rejectUnauthorized: false
     }).then(res => {
+      console.log(res)
       resolve(res?.message?.content);
-    }).catch(() => {
+    }).catch((err) => {
+      console.log(err);
       reject('chatgpt server error')
     })
   });
