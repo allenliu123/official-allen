@@ -14,6 +14,6 @@
     "request": "^2.88.2",
     "request-promise": "^4.2.6",
     "sync-request": "^6.1.0",
-    "wechat-public-nodejs": "^0.1.1"
+    "wechat-public-nodejs": "^0.1.3"
   }
 }
